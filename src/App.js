@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import apiKey from './config';
 
@@ -77,9 +78,14 @@ class App extends Component {
           photos: results
         });
       })
+      .then(() => <Redirect to="/" /> )
       .catch((error) => {
         console.log('Error with the fetch',error);
       })
+  }
+
+  displaySearch = (data) => {
+
   }
 
   render() {
@@ -90,11 +96,11 @@ class App extends Component {
           <Nav />
 
           <Switch>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" render={() => <PhotoContainer data={this.state.photos} />}/>
             <Route path="/fjords" render={() => <Fjords photos={this.state.fjordPhotos} />} />
             <Route path="/icebergs" render={() => <Icebergs photos={this.state.icebergPhotos} />} />
             <Route path="/glaciers" render={() => <Glaciers photos={this.state.glacierPhotos} />} />
-            <Route path="/search/:searchterm" render={() => <SearchResult />}/>
+            <Route path="/search/:searchterm" component={SearchResult}/>
             <Route component={NotFound} />      
           </Switch>
           
