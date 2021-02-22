@@ -15,6 +15,7 @@ import Fjords from './components/Fjords';
 import Glaciers from './components/Glaciers';
 import Icebergs from './components/Icebergs';
 import NotFound from './components/NotFound';
+import SearchResult from './components/SearchResult';
 import PhotoContainer from './components/PhotoContainer';
 
 class App extends Component {
@@ -93,6 +94,7 @@ class App extends Component {
             <Route path="/fjords" render={() => <Fjords photos={this.state.fjordPhotos} />} />
             <Route path="/icebergs" render={() => <Icebergs photos={this.state.icebergPhotos} />} />
             <Route path="/glaciers" render={() => <Glaciers photos={this.state.glacierPhotos} />} />
+            <Route path="/search/:searchterm" render={() => <SearchResult />}/>
             <Route component={NotFound} />      
           </Switch>
           
