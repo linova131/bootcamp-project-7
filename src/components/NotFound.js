@@ -3,7 +3,8 @@ import React from 'react';
 const NotFound = () => {
   return(
     <div>
-      <p>Sorry, it looks like there are no images matching your search</p>
+      <h1>404</h1>
+      <p>Sorry, it looks like that page doesn't exist!</p>
     </div>
   )
 }
