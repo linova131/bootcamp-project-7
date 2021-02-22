@@ -22,7 +22,8 @@ class App extends Component {
       photos: [],
       fjordPhotos: [],
       glacierPhotos: [],
-      icebergPhotos: []
+      icebergPhotos: [],
+      searchTerm: null
     }
   }  
 
@@ -87,10 +88,10 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/" component={Home}/>
-            <Route path="/fjords" render={() => <PhotoContainer data={this.state.fjordPhotos} />} />
-            <Route path="/icebergs" render={() => <PhotoContainer data={this.state.icebergPhotos} />} />
-            <Route path="/glaciers" render={() => <PhotoContainer data={this.state.glacierPhotos} />} />
-            <Route path="/search/:searchterm" render={()=> <PhotoContainer data={this.state.photos}/>} />
+            <Route path="/fjords" render={() => <PhotoContainer title= "fjords" data={this.state.fjordPhotos} />} />
+            <Route path="/icebergs" render={() => <PhotoContainer title= "icebergs" data={this.state.icebergPhotos} />} />
+            <Route path="/glaciers" render={() => <PhotoContainer title="glaciers" data={this.state.glacierPhotos} />} />
+            <Route path="/search/:searchterm" render={()=> <PhotoContainer title="search" data={this.state.photos}/>} />
             <Route component={NotFound} />      
           </Switch>
           
