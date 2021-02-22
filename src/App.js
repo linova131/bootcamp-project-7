@@ -10,9 +10,11 @@ import apiKey from './config';
 //App Components
 import SearchForm from './components/SearchForm';
 import Nav from './components/Nav';
+import Home from './components/Home';
 import Fjords from './components/Fjords';
 import Glaciers from './components/Glaciers';
 import Icebergs from './components/Icebergs';
+import NotFound from './components/NotFound';
 import PhotoContainer from './components/PhotoContainer';
 
 class App extends Component {
@@ -20,6 +22,7 @@ class App extends Component {
   constructor() {
     super();
     this.state= {
+      photos: [],
       fjordPhotos: [],
       glacierPhotos: [],
       icebergPhotos: []
@@ -65,7 +68,7 @@ class App extends Component {
   }
 
   performSearch = (query) => {
-    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=1f38b6734054154f700f8001ae0c691e&text=${query}&format=json&nojsoncallback=1&per_page=24`)
+    fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=1f38b6734054154f700f8001ae0c691e&text=${query}&format=json&nojsoncallback=1&per_page=24&sort=relevance`)
       .then(data=> data.json())
       .then(results=> {
         results = results.photos.photo
@@ -84,12 +87,15 @@ class App extends Component {
         <div>
           <SearchForm onSearch={this.performSearch}/>
           <Nav />
-          {/* <PhotoContainer data={this.state.fjordPhotos}/> */}
-          
-          <Route path="/fjords" render={() => <Fjords photos={this.state.fjordPhotos} />} />
-          <Route path="/icebergs" render={() => <Icebergs photos={this.state.icebergPhotos} />} />
-          <Route path="/glaciers" render={() => <Glaciers photos={this.state.glacierPhotos} />} />       
 
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/fjords" render={() => <Fjords photos={this.state.fjordPhotos} />} />
+            <Route path="/icebergs" render={() => <Icebergs photos={this.state.icebergPhotos} />} />
+            <Route path="/glaciers" render={() => <Glaciers photos={this.state.glacierPhotos} />} />
+            <Route component={NotFound} />      
+          </Switch>
+          
         </div>
       </BrowserRouter>
     );

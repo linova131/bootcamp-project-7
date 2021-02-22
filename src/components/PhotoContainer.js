@@ -7,7 +7,7 @@ const PhotoContainer = (props) => {
   let photos = [];
 
   photos = photoData.map(photo =>
-      <Photo server={photo.server} id={photo.id} secret={photo.secret} title={photo.title} />
+      <Photo server={photo.server} id={photo.id} secret={photo.secret} title={photo.title} key={photo.id}/>
     );
 
   return (
